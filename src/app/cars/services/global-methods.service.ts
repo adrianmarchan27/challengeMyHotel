@@ -39,21 +39,33 @@ export class GlobalMethodsService {
     if (keyToSort.toString().toLocaleLowerCase().includes('date')) {
       return data.sort((a: T, b: T) =>
         direction === 'ascending'
-          ? this.stringToDate(a[keyToSort] as unknown as string) -
-            this.stringToDate(b[keyToSort] as unknown as string)
-          : this.stringToDate(b[keyToSort] as unknown as string) -
-            this.stringToDate(a[keyToSort] as unknown as string)
+          ? (this.stringToDate(a[keyToSort] as unknown as string, true) as  number) -
+            (this.stringToDate(b[keyToSort] as unknown as string, true) as  number)
+          : (this.stringToDate(b[keyToSort] as unknown as string, true) as  number) -
+            (this.stringToDate(a[keyToSort] as unknown as string, true) as  number)
       );
     }
     return data.slice().sort(compare);
   }
 
-  stringToDate(stringDate: string): number {
+  stringToDate(
+    stringDate: string,
+    neededNumberResponse: boolean = false
+  ): number | Date {
     const [date, time] = stringDate.split(',');
     const [month, day, year] = date.split('-');
     const [hours, minutes] = time.split(':');
     let currentYear = new Date().getFullYear().toString().substring(2, 4);
     let completeYear = (year <= currentYear ? '20' : '19') + year;
+    if (neededNumberResponse)
+      return new Date(
+        +completeYear,
+        +month - 1,
+        +day,
+        minutes.substring(3, 5) === 'PM' ? +hours + 12 : +hours,
+        +minutes.substring(0, 2),
+        +'00'
+      ).getTime();
     return new Date(
       +completeYear,
       +month - 1,
@@ -61,7 +73,7 @@ export class GlobalMethodsService {
       minutes.substring(3, 5) === 'PM' ? +hours + 12 : +hours,
       +minutes.substring(0, 2),
       +'00'
-    ).getTime();
+    );
   }
 
   fillCarInterface(

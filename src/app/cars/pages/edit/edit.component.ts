@@ -55,7 +55,7 @@ export class EditComponent implements OnInit {
         this.editForm.controls['type'].setValue(car.type);
         this.editForm.controls['img'].setValue(car.img);
         this.editForm.controls['availableColors'].setValue(car.availableColors);
-        this.lastDateValue = this.stringToDate(car);
+        this.lastDateValue = this.globalMethodsService.stringToDate(car.elaborationDate) as Date;
         this.editForm.controls['elaborationDate'].setValue(this.lastDateValue);
       });
     this.carsService.getBrands().subscribe((brands) => (this.brands = brands));
@@ -69,22 +69,6 @@ export class EditComponent implements OnInit {
         ? this.editForm.controls['img'].value
         : null;
     return img;
-  }
-
-  stringToDate({elaborationDate}: Car): Date {
-    const [date, time] = elaborationDate.split(',');
-    const [month, day, year] = date.split('-');
-    const [hours, minutes] = time.split(':');
-    let currentYear = new Date().getFullYear().toString().substring(2, 4);
-    let completeYear = (year <= currentYear ? '20' : '19') + year;
-    return new Date(
-      +completeYear,
-      +month - 1,
-      +day,
-      minutes.substring(3, 5) === 'PM' ? +hours + 12 : +hours,
-      +minutes.substring(0, 2),
-      +'00'
-    );
   }
 
   saveCar() {
