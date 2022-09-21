@@ -1,0 +1,19 @@
+<div class="flex-wrap">
+  <div class="d-inline-flex p-2 align-self-center" *ngFor="let color of colors">
+    <button
+      mat-mini-fab
+      [style.background]="color"
+      (click)="chooseColor(color)"
+      [style.cursor]="canSelectColor ? 'pointer' : 'default'"
+    >
+      <ng-template [ngIf]="colorWithCheck === color">
+        <mat-icon
+          [style.color]="
+            color === 'white' || color === 'yellow' ? 'black' : 'white'
+          "
+          >done</mat-icon
+        >
+      </ng-template>
+    </button>
+  </div>
+</div>

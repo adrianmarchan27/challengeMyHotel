@@ -1,0 +1,70 @@
+<mat-grid-list cols="1" *ngIf="!car; else loadedCar">
+  <mat-grid-tile>
+    <mat-spinner></mat-spinner>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<ng-template #loadedCar>
+  <div class="row">
+    <div class="col-auto">
+      <button mat-icon-button (click)="comeBack()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+    </div>
+    <div class="col-auto mt-2">
+      <h1><mat-icon class="align-text-top">garage</mat-icon> {{ car.name }}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6" [style.background]="selectedColor">
+      <h2>Foto</h2>
+      <img src="{{ image }}" />
+    </div>
+    <div class="col-6">
+      <h2>Características</h2>
+      <mat-accordion class="headers-align">
+        <mat-expansion-panel
+          *ngFor="let content of expansionPanelContent; let i = index"
+          [expanded]="step === i"
+          (opened)="setStep(i)"
+        >
+          <mat-expansion-panel-header [style.background]="step === i ? 'orange' : 'white'">
+            <mat-panel-title> {{ content[0] | titlecase }} </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div
+            class="col-12 mt-3"
+            *ngIf="content[0] != 'colores disponibles' && content[0] != 'fecha de elaboración'"
+          >
+            <strong>{{ content[1] }}</strong>
+          </div>
+
+          <ng-template [ngIf]="content[0] === 'colores disponibles'">
+            <div class="col-12 mt-3">
+              <span>Presiona para cambiar el color</span>
+              <app-show-colors
+                [colors]="castInputOfColors(content[1])"
+                [canSelectColor]="true"
+                (selectedColor)="setSelectedColor($event)"
+              ></app-show-colors>
+            </div>
+          </ng-template>
+          
+          <ng-template [ngIf]="content[0] === 'fecha de elaboración'">
+            <div class="align-self-center  mt-3">
+              <p>
+                <mat-icon>calendar_month</mat-icon>
+                <span class="v-center p-1">{{car.elaborationDate | stringDate: 'date'}}</span>
+              </p>
+              <p>
+                <mat-icon>schedule</mat-icon>
+                <span class="v-center p-1">{{car.elaborationDate | stringDate: 'time'}}</span>
+              </p>
+            </div>
+          </ng-template>
+          
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</ng-template>

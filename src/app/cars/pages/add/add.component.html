@@ -1,0 +1,86 @@
+<h1>Nuevo vehículo</h1>
+
+<mat-grid-list cols="1" *ngIf="!brands || !colors || !types; else loadedForm">
+  <mat-grid-tile>
+    <mat-spinner></mat-spinner>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<ng-template #loadedForm>
+  <div class="animate__animated animate__fadeIn row justify-content-between">
+    <div class="col-6">
+      <form [formGroup]="addForm">
+        <mat-form-field>
+          <mat-label>Modelo</mat-label>
+          <input matInput type="text" formControlName="name" />
+          <mat-error *ngIf="globalMethodsService.getHasRequiredError(addForm,'name')">{{
+            globalMethodsService.getMessageIsRequired()
+          }}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Marca</mat-label>
+          <mat-select formControlName="brand">
+            <mat-option *ngFor="let brand of brands" [value]="brand.name">
+              {{ brand.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="globalMethodsService.getHasRequiredError(addForm,'brand')">{{
+            globalMethodsService.getMessageIsRequired()
+          }}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Tipo de vehículo</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let type of types" [value]="type.name">
+              {{ type.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="globalMethodsService.getHasRequiredError(addForm,'type')">{{
+            globalMethodsService.getMessageIsRequired()
+          }}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Foto Url</mat-label>
+          <input matInput type="text" formControlName="img" />
+          <mat-error *ngIf="globalMethodsService.getHasRequiredError(addForm,'img')">{{
+            globalMethodsService.getMessageIsRequired()
+          }}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Colores disponibles</mat-label>
+          <mat-select formControlName="availableColors" multiple>
+            <mat-option *ngFor="let color of colors" [value]="color.name">{{
+              color.name
+            }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="globalMethodsService.getHasRequiredError(addForm,'availableColors')">{{
+            globalMethodsService.getMessageIsRequired()
+          }}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Fecha de elaboración</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            formControlName="elaborationDate"
+          />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+          <mat-error *ngIf="globalMethodsService.getHasRequiredError(addForm,'elaborationDate')">{{
+            globalMethodsService.getMessageIsRequired()
+          }}</mat-error>
+        </mat-form-field>
+      </form>
+      <button mat-raised-button color="primary" (click)="saveCar()" class="w-100 mt-2">
+        <mat-icon>save</mat-icon> Crear
+      </button>
+    </div>
+    <div class="col-5">
+      <img [src]="getImgFromForm() || noImg" />
+    </div>
+  </div>
+</ng-template>

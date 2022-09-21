@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col">
+    <h1>Listado de Autos</h1>
+  </div>
+  <div class="col text-end">
+    <button mat-button [matMenuTriggerFor]="order">Ordenar por</button>
+    <mat-menu #order="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="names">Nombre</button>
+      <button mat-menu-item [matMenuTriggerFor]="brands">Marca</button>
+      <button mat-menu-item [matMenuTriggerFor]="quantitiesOfColors">Cantidad de colores</button>
+      <button mat-menu-item [matMenuTriggerFor]="dateTime">Fecha y Hora</button>
+    </mat-menu>
+
+    <mat-menu #names="matMenu">
+      <button mat-menu-item (click)="sortBy('name', 'ascending')">Ascendente</button>
+      <button mat-menu-item (click)="sortBy('name', 'descending')">Descendente</button>
+    </mat-menu>
+
+    <mat-menu #brands="matMenu">
+      <button mat-menu-item (click)="sortBy('brand', 'ascending')">Ascendente</button>
+      <button mat-menu-item (click)="sortBy('brand', 'descending')">Descendente</button>
+    </mat-menu>
+
+    <mat-menu #quantitiesOfColors="matMenu">
+      <button mat-menu-item (click)="sortBy('availableColors', 'ascending')">Ascendente</button>
+      <button mat-menu-item (click)="sortBy('availableColors', 'descending')">Descendente</button>
+    </mat-menu>
+
+    <mat-menu #dateTime="matMenu">
+      <button mat-menu-item (click)="sortBy('elaborationDate', 'ascending')">Ascendente</button>
+      <button mat-menu-item (click)="sortBy('elaborationDate', 'descending')">Descendente</button>
+    </mat-menu>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<br />
+
+<div class="col-12 w-100">
+  <div class="animate__animated animate__fadeIn" *ngFor="let car of cars">
+    <app-car-card [car]="car"></app-car-card>
+  </div>
+</div>
