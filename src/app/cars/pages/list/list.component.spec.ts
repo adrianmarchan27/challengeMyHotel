@@ -7,6 +7,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { StringDatePipe } from '../../pipes/string-date.pipe';
 import { CarsService } from '../../services/cars.service';
 import { of } from 'rxjs';
+import { By } from '@angular/platform-browser';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -67,4 +68,12 @@ describe('ListComponent', () => {
     expect(spy).toHaveBeenCalledBefore(subSpy);
     expect(subSpy).toHaveBeenCalled();
   }));
+
+  it('should show title', () => {
+    component.title = 'Listado de vehículos';
+    fixture.whenStable().then(() => {
+      const titleElement: HTMLElement = fixture.debugElement.query(By.css('h1')).nativeElement;
+      expect(titleElement.innerHTML).toContain('Listado de vehículos');
+    });
+  });
 });

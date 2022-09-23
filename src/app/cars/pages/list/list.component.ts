@@ -10,6 +10,7 @@ import { GlobalMethodsService } from '../../services/global-methods.service';
 })
 export class ListComponent implements OnInit {
   public cars: Car[] = [];
+  public title: string = 'Listado de vehículos';
 
   constructor(
     private carsService: CarsService,
