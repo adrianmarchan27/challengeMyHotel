@@ -2,6 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2.
 
+## Explicación Proyecto
+Realizado utilizando Angular Material y Bootstrap, cabe mencionar que agregue test al proyecto lo cual se puede revisar mediante el comando "ng test", además para poder utilizar el crud del proyecto se debe lanzar en consola los comandos "ng serve" y "npm run jsonServer". Espero este todo acorde a lo solicitado y muchas gracias por su tiempo.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

@@ -17,7 +17,10 @@
 
 <ng-template #loadedForm>
   <div class="animate__animated animate__fadeIn row justify-content-between">
-    <div class="col-6">
+    <div class="col-lg-6 col-md-6 col-md-12">
+      <img [src]="getImgFromForm() || noImg" />
+    </div>
+    <div class="col-lg-6 col-md-6 col-md-12">
       <form [formGroup]="editForm">
         <mat-form-field>
           <mat-label>Modelo</mat-label>
@@ -102,7 +105,7 @@
           >
         </mat-form-field>
       </form>
-      <div class="row">
+      <div class="row mb-2">
         <div class="col-6">
           <button
             mat-raised-button
@@ -124,9 +127,6 @@
           </button>
         </div>
       </div>
-    </div>
-    <div class="col-6">
-      <img [src]="getImgFromForm() || noImg" />
     </div>
   </div>
 </ng-template>

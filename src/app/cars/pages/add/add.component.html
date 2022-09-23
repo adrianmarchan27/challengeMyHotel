@@ -8,7 +8,10 @@
 
 <ng-template #loadedForm>
   <div class="animate__animated animate__fadeIn row justify-content-between">
-    <div class="col-6">
+    <div class="col-lg-6 col-md-6 col-md-12">
+      <img [src]="getImgFromForm() || noImg" />
+    </div>
+    <div class="col-lg-6 col-md-6 col-md-12">
       <form [formGroup]="addForm">
         <mat-form-field>
           <mat-label>Modelo</mat-label>
@@ -76,12 +79,9 @@
           }}</mat-error>
         </mat-form-field>
       </form>
-      <button mat-raised-button color="primary" (click)="saveCar()" class="w-100 mt-2">
+      <button mat-raised-button color="primary" (click)="saveCar()" class="w-100 mt-2 mb-2">
         <mat-icon>save</mat-icon> Crear
       </button>
-    </div>
-    <div class="col-5">
-      <img [src]="getImgFromForm() || noImg" />
     </div>
   </div>
 </ng-template>
