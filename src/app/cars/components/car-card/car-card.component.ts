@@ -7,7 +7,7 @@ import { Car } from '../../interfaces/car.interface';
   styleUrls: ['./car-card.component.scss']
 })
 export class CarCardComponent {
-  @Input() car!: Car;
+  @Input() car?: Car;
   selectedColor: string = '';
 
 

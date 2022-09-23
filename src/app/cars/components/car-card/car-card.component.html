@@ -2,8 +2,8 @@
   <mat-card-header class="background accent">
     <div class="row w-100 justify-content-between">
       <div class="col-3 text-center">
-        <mat-card-title>{{ car.name }}</mat-card-title>
-        <mat-card-subtitle>{{ car.brand }}</mat-card-subtitle>
+        <mat-card-title>{{ car?.name }}</mat-card-title>
+        <mat-card-subtitle>{{ car?.brand }}</mat-card-subtitle>
       </div>
       <div class="col-4 text-center">
         <mat-card-title>Colores</mat-card-title>
@@ -18,21 +18,21 @@
   <mat-card-content>
     <div class="row w-100 justify-content-around mt-4 mb-1">
       <div class="col-3">
-        <img src="{{car.img}}" />
+        <img src="{{car?.img}}" />
       </div>
       <div class="col-5 align-self-center text-center">
         <app-show-colors
-              [colors]="car.availableColors"
+              [colors]="car?.availableColors || []"
             ></app-show-colors>
       </div>
       <div class="col-3 align-self-center text-center">
         <p>
           <mat-icon>calendar_month</mat-icon>
-          <span class="v-center p-1">{{car.elaborationDate | stringDate: 'date'}}</span>
+          <span class="v-center p-1">{{(car?.elaborationDate || '') | stringDate: 'date'}}</span>
         </p>
         <p>
           <mat-icon>schedule</mat-icon>
-          <span class="v-center p-1">{{car.elaborationDate | stringDate: 'time'}}</span>
+          <span class="v-center p-1">{{(car?.elaborationDate || '') | stringDate: 'time'}}</span>
         </p>
       </div>
     </div>
@@ -40,12 +40,12 @@
   <mat-card-actions>
     <div class="row">
       <div class="col-6">
-        <button mat-raised-button color="primary" class="w-100 h-100" [routerLink]="['/cars/edit', car.id]">
+        <button mat-raised-button color="primary" class="w-100 h-100" [routerLink]="['/cars/edit', car?.id]">
           <mat-icon>edit</mat-icon><span class="separate">Editar</span>
         </button>
       </div>
       <div class="col-6">
-        <button mat-raised-button color="primary" class="w-100 h-100" [routerLink]="['/cars', car.id]">
+        <button mat-raised-button color="primary" class="w-100 h-100" [routerLink]="['/cars', car?.id]">
           <mat-icon>visibility</mat-icon><span class="separate">Ver más...</span>
         </button>
       </div>

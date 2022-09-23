@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { StringDatePipe } from '../../pipes/string-date.pipe';
 
 import { CarCardComponent } from './car-card.component';
 
@@ -8,7 +9,7 @@ describe('CarCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CarCardComponent ]
+      declarations: [ CarCardComponent, StringDatePipe ]
     })
     .compileComponents();
 
