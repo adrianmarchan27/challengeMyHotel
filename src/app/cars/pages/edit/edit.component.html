@@ -21,7 +21,7 @@
       <form [formGroup]="editForm">
         <mat-form-field>
           <mat-label>Modelo</mat-label>
-          <input matInput type="text" formControlName="name" ngDefaultControl/>
+          <input matInput type="text" formControlName="name" ngDefaultControl maxlength="15"/>
           <mat-error
             *ngIf="globalMethodsService.getHasRequiredError(editForm, 'name')"
             >{{ globalMethodsService.getMessageIsRequired() }}</mat-error
@@ -83,6 +83,7 @@
             [matDatepicker]="picker1"
             formControlName="elaborationDate"
             ngDefaultControl
+            [max]="maxDate"
           />
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle

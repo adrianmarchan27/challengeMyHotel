@@ -5,6 +5,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AddComponent } from './add.component';
 import { of } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 class MatSnackBarStub{
   open(){
     return {
@@ -22,7 +23,8 @@ describe('AddComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ AddComponent ],
       imports: [ ReactiveFormsModule, HttpClientTestingModule, ],
-      providers: [{provide: MatSnackBar, useClass: MatSnackBarStub}]
+      providers: [{provide: MatSnackBar, useClass: MatSnackBarStub}],
+      schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
 
@@ -42,5 +44,18 @@ describe('AddComponent', () => {
     expect(component.addForm.contains('img')).toBeTruthy();
     expect(component.addForm.contains('availableColors')).toBeTruthy();
     expect(component.addForm.contains('elaborationDate')).toBeTruthy();
+  });
+
+  it('Reactive form validation - name check', () => {
+    let name = component.addForm.controls['name'];
+    expect(name.valid).toBeFalsy();
+    expect(name.errors!['required']).toBeTruthy();
+  });
+
+  it('Reactive form validation - set empty name check', () => {
+    let name = component.addForm.controls['name'];
+    name.setValue('Rav4');
+    expect(name.valid).toBeTruthy();
+    expect(name.value).toEqual('Rav4');
   });
 });

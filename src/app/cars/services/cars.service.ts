@@ -14,7 +14,7 @@ import { Type } from '../interfaces/type.interface';
 })
 export class CarsService {
 
-  private baseUrl: string = environment.baseUrl;
+  public baseUrl: string = environment.baseUrl;
 
   constructor(private http: HttpClient) {}
 

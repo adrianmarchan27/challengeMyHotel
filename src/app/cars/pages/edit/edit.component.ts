@@ -20,13 +20,14 @@ import { GlobalMethodsService } from '../../services/global-methods.service';
 })
 export class EditComponent implements OnInit {
   public editForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required]],
+    name: ['', [Validators.required, Validators.maxLength(15)]],
     brand: ['', [Validators.required]],
     type: ['', [Validators.required]],
     img: ['', [Validators.required]],
     availableColors: ['', [Validators.required]],
     elaborationDate: [new Date(), [Validators.required]],
   });
+  public maxDate: Date = new Date();
   public brands!: Brand[];
   public colors!: Color[];
   public types!: Type[];
